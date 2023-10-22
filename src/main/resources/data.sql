@@ -1,0 +1,31 @@
+--SET AUTOCOMMIT OFF;
+
+--PREPARE COMMIT circularRef;
+INSERT INTO DEPARTMENT (DEPARTMENT_ID, DEPARTMENT_NAME)
+VALUES ('1', 'IT');
+INSERT INTO DEPARTMENT (DEPARTMENT_ID, DEPARTMENT_NAME)
+VALUES ('2', 'HR');
+INSERT INTO DEPARTMENT (DEPARTMENT_ID, DEPARTMENT_NAME)
+VALUES ('3', 'FINANCE');
+
+
+INSERT INTO POSITION (Position_ID, Position_Name) VALUES(1, 'DIRECTOR OF ENGINEERING');
+
+INSERT INTO USER_ACCOUNT (USER_ID, USER_USER_NAME, USER_FULL_NAME,
+User_Password, User_Phone, User_Email, User_Image, USER_IS_ACTIVE, USER_POSITION)
+VALUES ('1', 'VS', 'Vasant Subramanian', '123456', '9876543210', 'vs@unknownworld.in', null, 1, 1);
+
+INSERT INTO USER_ACCOUNT (USER_ID, USER_USER_NAME, USER_FULL_NAME,
+User_Password, User_Phone, User_Email, User_Image, USER_IS_ACTIVE, USER_POSITION)
+VALUES ('2', 'JOHN', 'John Doe', '123456', '9876543210', 'john@unknownworld.in', null, 1, 1);
+
+INSERT INTO DEPARTMENT_USER_MAPPING (DEPARTMENT_ID, USER_ID, IS_DEPARTMENT_HEAD) VALUES('1', '1', 1);
+
+INSERT INTO Task_Category (Task_Category_ID, Category_Name) VALUES('1', 'Work');
+
+INSERT INTO TASK (TASK_ID, Task_Title, Task_Category_ID, Task_Content, Task_Personal_Send, Task_Personal_Receive,
+TASK_DATE_SEND, TASK_DATE_END, Task_State)
+VALUES ('1', 'Task 1', '1', 'Task 1 Content', '1', '2', CURRENT_TIMESTAMP, '2023-12-30', 1);
+
+--COMMIT TRANSACTION circularRef;
+--commit;
